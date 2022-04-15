@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>선택</title>
+    <link rel="stylesheet" href="style2.css">
+    
+</head>
+<body>
+    <div class="container">
+        <input type="radio" id="select1" name="select" value="1">
+        <input type="radio" id="select2" name="select" value="2">
+        <input type="radio" id="select3" name="select" value="3">
+        <label id="label1" class="box" for="select1">
+            <img src="001.png">
+            <span>이상해씨</span>
+        </label>
+        <br><br>
+        <label id="label2" class="box" for="select2">
+            <img src="004.png">
+            <span>파이리</span>
+        </label>
+        <br><br>
+        <label id="label3" class="box" for="select3">
+            <img src="007.png">
+            <span>꼬부끼</span>
+        </label>
+    </div>
+    <button id="ok" onclick="itemSeleted()">선택 완료</button> 
+    <script>
+        document.body.addEventListener('change', function(e) {
+            let target = e.target;
+            var index = 0;
+            switch (target.id) {
+                case 'select1':
+                    index = 0;
+                    break;
+                    case 'select2':
+                    index = 1;
+                    break;
+                case 'select3':
+                    index = 2;
+                    break;
+            }
+            var box = document.getElementsByClassName("box");
+            var colorList = ["#09c14f", "#ff742a", "#2da2ff"];
+            for(var i = 0; i < box.length; i++) {
+                var img = box[i].getElementsByTagName("img");
+                var span = box[i].getElementsByTagName("span");
+                if(i == index) {
+                    img[0].style.height = "125%";
+                    box[i].style.animationPlayState = "running";
+                    box[i].style.filter = "grayscale(0)";
+                    span[0].style.color = colorList[i];
+                    scrollTo(box[i].offsetTop, box[i].offsetTop /2);
+                } else {
+                    img[0].style.height = "100%"
+                    box[i].style.animationPlayState = "paused";
+                    box[i].style.filter = "grayscale(1)";
+                }
+            }
+        });
+
+        function itemSeleted() {
+            try {
+                var test = document.querySelector("input[name='select']:checked").value;
+                alert("버튼1을 누르셨습니다." + test);
+            } catch (error) {
+                alert("케릭터를 선택해 주세요");
+            }
+            
+        }
+    </script>
+</body>
+
+</html>
+
+<!-- 참고 자료 : https://www.youtube.com/watch?v=R4rccU8YQjQ -->
